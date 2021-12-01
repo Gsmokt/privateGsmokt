@@ -1,0 +1,182 @@
+class Deck {
+    constructor(cards,suit,value){
+      this.cards = cards,
+      this.suit = suit,
+      this.value = value
+    }
+  }
+  class Cards{
+    constructor(){
+      this.cardDeck = []
+      this.randomCardDeck = []
+
+    }
+    createDeck(){
+      const card = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
+      const suits = ["clubs", "diamonds", "spades", "hearts"];
+      const value = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+      for(let i = 0; i < suits.length; i++){
+        for(let j =0; j < card.length; j++){
+          this.cardDeck.push(new Deck(suits[i], card[j],value[j]))
+        }
+      }
+      return this.cardDeck
+    }
+    randomDeck(){
+        for(let i =0; i < 5; i++){
+          this.randomCardDeck.push(this.cardDeck[(Math.floor(Math.random()*(this.cardDeck.length)))])
+        }
+        return this.randomCardDeck
+    }
+    deckEvaluator(){
+        this.randomCardDeck.sort((a,b) => {
+           return a.value - b.value
+        })
+        return this.randomCardDeck
+    }
+    isRoyalFlush(){
+        let c = this.randomCardDeck;
+        let win;
+        let a = 0;
+        for( let i = 0; i < c.length; i++){
+          a += c[i].value
+        }
+        for(let i =0; i < c.length;i++){
+            if(a === 60 && c[0].cards === c[1].cards && c[2].cards === c[3].cards && c[0].cards === c[4].cards){
+              win = 'Royal flush!'
+            }
+        }
+        return win
+    }
+    isStraightFlush(){
+        let c = this.randomCardDeck;
+        let win;
+        const ap = []
+        for( let i = 0; i < c.length; i++){
+          ap.push(c[i].value)
+        }
+        for(let i = 4; i >= 0; i--){
+            if(ap[i]-ap[i-1] === 1 && c[0].cards === c[1].cards && c[2].cards === c[3].cards && c[0].cards === c[4].cards){
+                win = 'Straight Flush!'
+            }
+        }
+          return win
+    }
+    isStraigt(){
+        let c = this.randomCardDeck;
+        let win;
+        const ap = []
+        for( let i = 0; i < c.length; i++){
+          ap.push(c[i].value)
+        }
+        for(let i = 4; i >= 0; i--){
+            if(ap[i]-ap[i-1] === 1 && c[0].cards === c[1].cards && c[0].cards === c[2].cards && c[0].cards === c[3].cards && c[0].cards === c[5].cards){
+                win = 'Straight Flush!'
+            }
+        }
+          return win
+    }
+    isFlush(){
+        let c = this.randomCardDeck;
+        let win;
+        if(c[0].cards === c[1].cards && c[0].cards === c[2].cards && c[0].cards === c[3].cards && c[0].cards === c[5].cards){
+            win = 'Flush!'
+          }
+          return win
+    }
+    isPairisThreeisFullisFour(){
+        let c = this.randomCardDeck;
+        let win;
+        let v = 0;
+        for( let i = 1; i < c.length; i++){
+           if(c[0].value === c[i].value){
+               v++
+           }
+          }
+          for( let i = 2; i < c.length; i++){
+            if(c[1].value === c[i].value){
+                v++
+            }
+           }
+           for( let i = 3; i < c.length; i++){
+            if(c[2].value === c[i].value){
+                v++
+            }
+           }
+           for( let i = 4; i < c.length; i++){
+            if(c[3].value === c[i].value){
+                v++
+            }
+           }
+           if(v==1){
+               win = 'One Pair!'
+           }
+           if(v==2){
+            win = 'Two Pair!'
+        }
+        if(v==3){
+            win = 'Three of a kind!'
+        }
+        if(v==4){
+            win = 'Full house!'
+        }
+        if(v==6){
+            win = 'Four of a kind!'
+        }
+        return win
+    }
+    isHighestCard(){
+        let win = this.randomCardDeck[this.randomCardDeck.length -1].suit;
+        return win
+    }
+    result(){
+        let win;
+        const aray = [
+            this.isRoyalFlush(),
+            this.isStraightFlush(),
+            this.isStraigt(),
+            this.isHighestCard(),
+            this.isFlush(),
+            this.isPairisThreeisFullisFour(),
+        ]
+        for(const a of aray){
+            switch(a){
+                case 'Royal flush!':
+                    win = 'Royal flush!'
+                    break;
+                case 'Straight Flush!':
+                    win = 'Straight Flush!'
+                    break;
+                case 'Four of a kind!':
+                    win = 'Four of a kind!'
+                    break;
+                case 'Full house!':
+                    win = 'Full house!'
+                    break;
+                case 'Flush!':
+                    win = 'Flush!'
+                    break;
+                case 'Straight!':
+                    win = 'Straight!'
+                    break;
+                case 'Three of a kind!':
+                        win = 'Three of a kind!'
+                        break;
+                case 'Two Pair!':
+                            win = 'Two Pair!'
+                            break;
+                case 'One Pair!':
+                                win = 'One Pair!'
+                                break;
+               default:
+                   win = `Hight card! - ${this.isHighestCard()}`
+            }
+        }
+        return win
+    }
+}
+const game = new Cards();
+console.log(game.createDeck())
+console.log(game.randomDeck())
+console.log(game.deckEvaluator())
+console.log(game.result())
