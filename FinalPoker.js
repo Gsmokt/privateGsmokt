@@ -25,7 +25,8 @@ class Deck {
     }
     randomDeck(){
         for(let i =0; i < 5; i++){
-          this.dek.push(this.car[(Math.floor(Math.random()*(this.car.length)))])
+            let rand = this.car.splice(Math.floor(Math.random()*(this.car.length)),1)
+            this.dek.push(...rand)
         }
         return this.dek
     }
@@ -122,7 +123,7 @@ class Deck {
                     won.sort((a,b)=> a-b)
                     win = won[won.length -1]
                 }
-                
+
             }
             for(const[key,value] of Object.entries(this.res)){
                 if(value === win){
@@ -130,9 +131,9 @@ class Deck {
                     if(win === 'Hight card!'){
                     win = `Hight card! : ${this.cer[this.cer.length -1].suit}`
                 }}     
-                    
+
                 }
-                      
+
 }
     return win         
 }
