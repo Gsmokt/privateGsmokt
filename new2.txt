@@ -1,0 +1,63 @@
+class Card {
+    constructor(suit, cardRank){
+      this.suit = suit,
+      this.cardRank = cardRank
+    }
+  }
+  class Deck{
+      deck = [];
+      sorted = [];
+      cardValue = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "Jack":11, "Queen":12, "King":13, "Ace":14};
+      rank = {'Royal Flush!': 10, 'Straight Flush!':9,'Four of a kind!': 8, 'Full house!': 7, 'Flush!': 6, 'Straight!': 5, 'Three of a kind!': 4, 'Two Pairs!': 3, 'One Pair!': 2, "Hight card!": 1
+    };
+    createDeck(){
+        const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"];
+        const suits = ["clubs","hearts","diamonds","spades"];
+        suits.map(e => rank.map(el => this.deck.push(new Card(e, el)))); 
+    };
+    createHand(){
+        for(let i = 0; i < 5; i++){
+            this.sorted.push(...this.deck.splice(Math.floor(Math.random()*(this.deck.length)),1))
+        };
+            this.sorted.sort((a,b) => this.cardValue[a.cardRank] - this.cardValue[b.cardRank]);
+        return this.sorted
+    };
+    isHandFlush(){
+        let truth = 0, win = 1;
+        const colors = this.sorted.every(e => e.suit === this.sorted[0].suit);
+        for(let i = 0; i <= 3; i++){
+            if(this.cardValue[this.sorted[i].cardRank] - this.cardValue[this.sorted[i+1].cardRank] === -1) truth++;
+        };
+            (this.cardValue[this.sorted[0].cardRank] === 10 && truth === 4  && colors) ? win = 10 :null;
+            (truth === 4  && colors) ? win = 9 :null;
+            truth === 4 ? win = 5 :null;
+            colors ? win = 6 :null;       
+        return win
+    };
+    isHandValue(){
+        let win;
+        const array =[];
+        const value =  this.sorted.map(e => this.cardValue[e.cardRank]);
+        const set = new Set(value);
+        [...set].map(el => array.push(value.filter(e => e === el)));
+            (array.length === 2 && array.some(e => e.length === 4)) ? win = 8 :null;
+            (array.length === 2 && array.some(e => e.length === 3) ) ? win = 7 :null;
+            (array.length === 3 && array.some(e => e.length === 3) )? win = 4 :null;
+            (array.length === 3 && array.some(e => e.length === 2)) ? win = 3 :null;
+            (array.length === 4) ? win = 2 :null;
+            array.length === 5 ? win = 1 :null;
+        return win
+      };
+    result(){
+        let win;
+        const aray = [this.isHandFlush(), this.isHandValue()];
+        aray.sort((a,b) => a-b);
+        Object.entries(this.rank).filter(([key,value])=> value === aray[aray.length -1] ? win=key :null);
+        win === 'Hight card!' ? win = `Hight card! : ${this.sorted[this.sorted.length -1].cardRank}` :null;     
+        return win         
+  };
+  };
+  const poker = new Deck();
+  poker.createDeck();
+  console.log(poker.createHand());
+  console.log(poker.result());
