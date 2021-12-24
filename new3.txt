@@ -11,13 +11,10 @@ class Card {
       rank = {'Royal Flush!': 10, 'Straight Flush!':9,'Four of a kind!': 8, 'Full house!': 7, 'Flush!': 6, 'Straight!': 5, 'Three of a kind!': 4, 'Two Pairs!': 3, 'One Pair!': 2, "Hight card!": 1
     };
     createDeck(){
-        const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"];
         const suits = ["clubs","hearts","diamonds","spades"];
-        suits.map(e => rank.map(el => this.deck.push(new Card(e, el)))); 
-    };
-    createHand(){
-        for(let i = 0; i < 5; i++){
-            this.sorted.push(...this.deck.splice(Math.floor(Math.random()*(this.deck.length)),1))
+        suits.map(e => Object.keys(this.cardValue).map(el => this.deck.push(new Card(e, el))));
+        for(let i =0; i < 5; i++){
+            this.sorted.push(...this.deck.splice(Math.floor(Math.random()*(this.deck.length)),1));
         };
             this.sorted.sort((a,b) => this.cardValue[a.cardRank] - this.cardValue[b.cardRank]);
         return this.sorted
@@ -36,8 +33,7 @@ class Card {
     };
     isHandValue(){
         let win;
-        const array =[];
-        const value =  this.sorted.map(e => this.cardValue[e.cardRank]);
+        const value =  this.sorted.map(e => this.cardValue[e.cardRank]),array = [];
         [...new Set(value)].map(el => array.push(value.filter(e => e === el)));
             (array.length === 2 && array.some(e => e.length === 4)) ? win = 8 :null;
             (array.length === 2 && array.some(e => e.length === 3) ) ? win = 7 :null;
@@ -49,14 +45,12 @@ class Card {
       };
     result(){
         let win;
-        const aray = [this.isHandFlush(), this.isHandValue()];
-        aray.sort((a,b) => a-b);
+        const aray = [this.isHandFlush(), this.isHandValue()].sort((a,b) => a-b);
         Object.entries(this.rank).filter(([key,value])=> value === aray[aray.length -1] ? win=key :null);
         win === 'Hight card!' ? win = `Hight card! : ${this.sorted[this.sorted.length -1].cardRank}` :null;     
         return win         
   };
   };
   const poker = new Deck();
-  poker.createDeck();
-  console.log(poker.createHand());
+  console.log(poker.createDeck());
   console.log(poker.result());
