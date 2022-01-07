@@ -1,43 +1,4 @@
-const isPossible = (puzzle, x, y, number) => {
-    for (let i = 0; i < 9; i++) {
-      if (puzzle[x][i] === number) {
-        return false
-      };
-      if (puzzle[i][y] === number) {
-        return false
-      }; 
-    }; 
-    
-    const row = Math.floor(x / 3) * 3, col = Math.floor(y / 3) * 3;
-    
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (puzzle[row+i][col+j] === number) {
-          return false
-        };
-      };
-    };
-  return true
-  };
-  
-  const solve = (puzzle) => {
-    for (let x = 0; x < 9; x++) {
-      for (let y = 0; y < 9; y++) {
-        if (puzzle[x][y] === 0) {
-          for (let number = 1; number <= 9; number++) {
-            if (isPossible(puzzle, x, y, number)) {
-              puzzle[x][y] = number;
-              if (solve(puzzle)) return true
-            };
-          };
-          puzzle[x][y] = 0;
-          return false
-        };
-      };
-    };
-    return true
-  };
-  
+const sudoku = () => {
   const puzzle = [
     [7, 0, 4, 8, 0, 0, 3, 0, 1],
     [8, 2, 0, 5, 0, 0, 0, 4, 0],
@@ -49,7 +10,48 @@ const isPossible = (puzzle, x, y, number) => {
     [0, 7, 0, 0, 0, 0, 0, 6, 5],
     [5, 0, 8, 0, 0, 2, 1, 0, 3],
   ];
+const isPossible = (puzzle, x, y, number) => {
+  for (let i = 0; i < 9; i++) {
+    if (puzzle[x][i] === number) {
+      return false
+    };
+    if (puzzle[i][y] === number) {
+      return false
+    }; 
+  }; 
   
-  if(solve(puzzle)){
-    console.log(puzzle.map(e => "" + e));
-  }else console.log('Brak rozwiązania');
+  const row = Math.floor(x / 3) * 3, col = Math.floor(y / 3) * 3;
+  
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (puzzle[row+i][col+j] === number) {
+        return false
+      };
+    };
+  };
+return true
+};
+
+const solve = (puzzle) => {
+  for (let x = 0; x < 9; x++) {
+    for (let y = 0; y < 9; y++) {
+      if (puzzle[x][y] === 0) {
+        for (let number = 1; number <= 9; number++) {
+          if (isPossible(puzzle, x, y, number)) {
+            puzzle[x][y] = number;
+            if (solve(puzzle)) return true
+          };
+        };
+        puzzle[x][y] = 0;
+        return false
+      };
+    };
+  };
+  return true
+};
+
+if(solve(puzzle)) return puzzle.map(e => "" + e)
+else return "Brak rozwiązania"
+};
+
+console.log(sudoku());
