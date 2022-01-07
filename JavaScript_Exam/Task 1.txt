@@ -1,31 +1,31 @@
-function game(){
-     let ball;
-     const tab = [1,1,1,1,1,1,1,2],a = [];
-     [...tab].map(() => a.push(...tab.splice(Math.floor(Math.random() * tab.length),1)));
-   console.log(a);
-     if(JSON.stringify([a[0],a[1],a[2]]) === JSON.stringify([a[3],a[4],a[5]])){
-         if(a[6] > a[7]){
-          ball = 6;
-           }else{
-              ball = 7;
-             };
-       }else if(JSON.stringify([a[0],a[1],a[2]]) > JSON.stringify([a[3],a[4],a[5]])){
-         if( a[0] === a[1] ){
-              ball = 2;
-         }else if(a[0] === a[2]){
-              ball = 1;
-         }else{
-              ball = 0;
-         };
-     }else{
-         if( a[3] === a[4] ){
-              ball = 5;
-         }else if(a[4] === a[5]){
-              ball = 3;
-         }else{
-              ball = 4;
-         };
-   };
-   return ball
-   };
-   console.log(game())
+const game = () => {
+  let ball;
+  const tab = [1,1,1,1,1,1,1,2],a = [];
+  [...tab].map(() => a.push(...tab.splice(Math.floor(Math.random() * tab.length),1)));
+console.log(a);
+  if([a[0],a[1],a[2]]+"" === [a[3],a[4],a[5]]+""){
+      if(a[6] > a[7]){
+       ball = 6;
+        }else{
+           ball = 7;
+          };
+    }else if([a[0],a[1],a[2]]+"" > [a[3],a[4],a[5]]+""){
+      if( a[0] === a[1] ){
+           ball = 2;
+      }else if(a[0] === a[2]){
+           ball = 1;
+      }else{
+           ball = 0;
+      };
+  }else{
+      if( a[3] === a[4] ){
+           ball = 5;
+      }else if(a[4] === a[5]){
+           ball = 3;
+      }else{
+           ball = 4;
+      };
+};
+return ball
+};
+console.log(game());
