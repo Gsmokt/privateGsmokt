@@ -17,11 +17,11 @@ const sudoku = () => {
      for (let i = 0; i < 9; i++) {
        if (puzzle[x][i] === number) {   // Cheks the number vertically
          return false
-       };
+       }
        if (puzzle[i][y] === number) {   // Cheks the number horizontally
          return false
-       }; 
-     }; 
+       } 
+     }
      
      const row = Math.floor(x / 3) * 3, col = Math.floor(y / 3) * 3;
      
@@ -29,9 +29,9 @@ const sudoku = () => {
        for (let j = 0; j < 3; j++) {
          if (puzzle[row+i][col+j] === number) {    // Cheks the number in the 3x3 square
            return false
-         };
-       };
-     };
+         }
+       }
+     }
    return true
    };
    
@@ -43,13 +43,13 @@ const sudoku = () => {
              if (isPossible(puzzle, x, y, number)) {
                puzzle[x][y] = number;
                if (solve(puzzle)) return true   //Check next field with recursion
-             };
-           };
+             }
+           }
            puzzle[x][y] = 0;
            return false
-         };
-       };
-     };
+         }
+       }
+     }
      return true
    };
    

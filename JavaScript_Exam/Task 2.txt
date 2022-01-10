@@ -12,7 +12,7 @@ class Deck{
       constructor(suit, cardRank){
         this.suit = suit;
         this.cardRank = cardRank
-      };
+      }
     };
   createDeck(){  // Create 52 card deck and hand
       const suits = ["clubs","diamonds","hearts","spades"];
@@ -20,19 +20,19 @@ class Deck{
       this.hand = deck.slice(0,5).flatMap(() => deck.splice(Math.floor(Math.random()*(deck.length)),1)); // 5 cards
       this.hand.sort((a,b) => this.cardValue[a.cardRank] - this.cardValue[b.cardRank]);
       return this.hand
-  };
+  }
   isHandFlush(){  // Check : Royal Flush, Straight Flush, Flush, Straight
       let truth = 0, win = 1;
       const colors = this.hand.every(e => e.suit === this.hand[0].suit);
       for(let i = 0; i <= 3; i++){
           (this.cardValue[this.hand[i].cardRank] - this.cardValue[this.hand[i+1].cardRank] === -1) ? truth++:null;
-      };
+      }
          if(this.cardValue[this.hand[0].cardRank] === 10 && truth === 4  && colors) win = 10;
           else if(truth === 4  && colors) win = 9;
           else if(colors) win = 6;
           else if(truth === 4) win = 5;     
       return win
-  };
+  }
   isHandValue(){  // Check : Four of a kind, Full house, Three of a kind, Two Pairs, One Pair 
       let win = 1;
       const value =  this.hand.map(e => this.cardValue[e.cardRank]);
@@ -43,14 +43,14 @@ class Deck{
           else if(array.length === 3 && array.some(e => e.length === 2)) win = 3;
           else if(array.length === 4) win = 2;
       return win
-    };
+    }
   result(){  // Return best poker set
       const aray = [this.isHandFlush(), this.isHandValue()].sort((a,b) => a-b);
       let win = Object.keys(this.rank).find(key => this.rank[key] === aray[aray.length-1]);
       win === 'Hight card!' ? win = `Hight card! : ${this.hand[this.hand.length -1].cardRank}` :null;     
       return win         
-  };
-  };
+  }
+  }
   const poker = new Deck();
   console.log(poker.createDeck());
   console.log(poker.result());

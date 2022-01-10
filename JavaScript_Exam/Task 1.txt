@@ -13,7 +13,7 @@ const game = () => {
           ball = 6;
            }else{
               ball = 7;
-             };
+             }
        }else if(Number([a[0],a[1],a[2]].join('')) > Number([a[3],a[4],a[5]].join(''))){
          if( a[0] === a[1] ){
               ball = 2;
@@ -21,7 +21,7 @@ const game = () => {
               ball = 1;
          }else{
               ball = 0;
-         };
+         }
      }else{
          if( a[3] === a[4] ){
               ball = 5;
@@ -29,8 +29,8 @@ const game = () => {
               ball = 3;
          }else{
               ball = 4;
-         };
-   };
+         }
+   }
    return `Index of heavier ball: ${ball}`
    }
    console.log(game());
