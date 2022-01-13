@@ -7,7 +7,7 @@ const repos  = (name) => {
         .then((response) => {
           if(response.status === 200 && response.statusText === 'OK') resolve(response);
         })
-        .catch(error => reject('Błąd pobierania'));
+        .catch(error => reject(`Błąd pobierania: ${error.response.status}`));
     })
   }
   
