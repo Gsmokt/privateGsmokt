@@ -1,5 +1,5 @@
 const fs = require('fs');
-const file = './fil.json';
+
 function storeData (name, data, path){
   if(!name) return console.log('Użyj komend: add, delete lub list.');
   if(name !== 'add')  return console.log('Wpisz poprawnie komendę');
