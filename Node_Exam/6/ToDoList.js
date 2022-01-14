@@ -1,5 +1,5 @@
 const fs = require('fs');
-const file = './fil.json';
+
 const printData = (path) => {
     const er = new Error('Nie udało się wyświetlić listy');
     try{   
