@@ -1,6 +1,8 @@
 const fs = require('fs');
 const file = './fil.json';
-function storeData (data, path){
+function storeData (name, data, path){
+  if(!name) return console.log('Użyj komend: add, delete lub list.');
+  if(name !== 'add')  return console.log('Wpisz poprawnie komendę');
   const er = new Error('Nie udało się dodać nowego zadania');
   if(!data){
     console.log('Wpisz zadanie')
