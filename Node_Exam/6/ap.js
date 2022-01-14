@@ -22,6 +22,12 @@ const {deleteTask} = require('./DeleteTask');
 )
   program.parse(process.argv)
 
+  // Przykład wywołania programu:
+
+  // > node ap.js add "napisac program na zaliczenie z NodeJS"
+  // > node ap.js list
+  // > node ap.js delete 1
+
 
 
 
