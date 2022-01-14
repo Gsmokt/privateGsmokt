@@ -34,4 +34,8 @@ async function result(num){
 
 result(dataJson.number);
 
+// Przykład wywołania programu:
+
+// > node ap.js 
+
 
