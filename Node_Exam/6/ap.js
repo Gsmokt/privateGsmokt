@@ -6,9 +6,9 @@ const {deleteTask} = require('./DeleteTask');
 
 
   program
-  .command('add [task]')
+  .command('ad [add] [task]', {isDefault:true})
   .description('Add new task')
-  .action((task)=> storeData(task, 'fil.json')
+  .action((add, task)=> storeData(add, task, 'fil.json')
   )
   program
   .command('delete [num]')
