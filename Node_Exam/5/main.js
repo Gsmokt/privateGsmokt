@@ -3,6 +3,7 @@ const {repos} = require('./repos');
 const {user} = require('./user');
 
 async function api(name,followers){
+    if(!name) return console.log('Wprowadź nazwę użytkownika');
     try{
     const userr = await user(name);
     const weatherr = await weather(userr);
