@@ -8,3 +8,8 @@ program
 .action((name,followers) => api(name,followers))
 
 program.parse(process.argv)
+
+// Przykład wywołania programu:
+
+// > node ap.js octocat
+// > node ap.js octocat followers
