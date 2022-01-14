@@ -8,7 +8,7 @@ async function api(name,followers){
     const userr = await user(name);
     const weatherr = await weather(userr);
     const rep = await repos(name);
-    if(followers === undefined || null){
+    if(followers === undefined || null || followers !== 'followers'){
         const repo = rep.data.map((e,i) => `${i+1}.${e.name}\n`);
         const reposit = repo.join("");
         const obj ={
