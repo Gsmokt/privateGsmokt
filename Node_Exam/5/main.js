@@ -20,6 +20,7 @@ async function api(name,followers){
         for(const [key,value] of Object.entries(obj)){
             console.log(`${key}: ${value}`)
         }
+        console.log('Aby wyświetlić liczbę followersów, wpisz: followers, po nazwie użytkownika');
     }else{
         const repo = rep.data.map((e,i) => `${i+1}.${e.name}\n`);
         const reposit = repo.join("");
