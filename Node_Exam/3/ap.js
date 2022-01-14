@@ -14,3 +14,6 @@ try{
   }
 }
 func(__filename);
+
+// Przykład wywołania programu:
+// > node ap.js
