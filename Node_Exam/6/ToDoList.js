@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 const printData = (path) => {
-    const er = new Error('Nie udało się wyświetlić listy');
     try{   
     const fl = JSON.parse(fs.readFileSync(path));
     if(fl.length === 0){
@@ -13,6 +12,7 @@ const printData = (path) => {
             })
         } 
     }catch(error){
+    const er = new Error('Nie udało się wyświetlić listy');
     console.log(er.message);
     }
 }
