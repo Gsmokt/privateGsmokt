@@ -18,13 +18,13 @@ const func = (num) => {
 }
 
 async function result(num){
-    const er = new Error('Nie udało się zapisać pliku');
     try{
         const res = await func(num);
         try{
             fs.writeFileSync(dataJson.filename, res.data);
             console.log('Zapisano pomyślnie');
         }catch(error){
+            const er = new Error('Nie udało się zapisać pliku');
             console.log(er.message);
         }
     }catch(error){
