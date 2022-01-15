@@ -4,7 +4,6 @@ function deleteTask(number, path){
   if(!number){
     console.log('Wpisz numer zadania')
   }else{
-      const er = new Error('Nie udało się usunąć zadania');
     try {
     const fl = JSON.parse(fs.readFileSync(path));
     if(fl.length <= 0){
@@ -15,6 +14,7 @@ function deleteTask(number, path){
       console.log('Usunąłeś zadanie!');
     }
       } catch (err) {
+        const er = new Error('Nie udało się usunąć zadania');
         console.log(er.message);
       };
   }
