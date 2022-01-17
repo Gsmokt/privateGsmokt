@@ -24,8 +24,7 @@ async function result(num){
             fs.writeFileSync(dataJson.filename, res.data);
             console.log('Zapisano pomyślnie');
         }catch(error){
-            const er = new Error('Nie udało się zapisać pliku');
-            console.log(er.message);
+            console.log(`${error} - nie udało się zapisać pliku`);
         }
     }catch(error){
         console.log(error);
