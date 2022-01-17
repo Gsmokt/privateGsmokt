@@ -1,19 +1,31 @@
 let fs = require('fs');
+const util = require('util');
+const statAsync = util.promisify(fs.stat);
 
+const stat = (filename) => {
+    const result = statAsync(filename);
+    return result;
+};
 
-const func = (filename) => {
-try{
-    const stat = fs.statSync(filename);
-    console.log(`File size: ${stat.size} B`);
-    console.log(`File creation date: ${stat.birthtime.toLocaleString()}`);
-    console.log(`File data modification date : ${stat.mtime.toLocaleString()}`);
-    console.log(`File status modification date: ${stat.ctime.toLocaleString()}`);
-  }catch(error){
-    const er = new Error('Nie udało się pobrać danych');
-    console.log(er.message);
-  }
-}
+const func = async(filename) => {
+    try{
+      const res = await stat(filename);
+      const stats = {
+      File_size: `${res.size} B`,
+      File_creation_date: `${res.birthtime.toLocaleString()}`,
+      File_data_modification_date: `${res.mtime.toLocaleString()}`,
+      File_resus_modification_date: `${res.ctime.toLocaleString()}`
+      }
+      for(const [key,value] of Object.entries(stats)){
+      console.log(`${key}: ${value}`);
+      }
+    }catch(error){
+      console.log(`${error} -  Nie udało się pobrać danych`);
+    }
+};
+
 func(__filename);
+
 
 // Przykład wywołania programu:
 // > node ap.js
