@@ -20,13 +20,12 @@ const deleteTask = async(number, path) => {
     try {
     const file = await read(path);
     const fl = JSON.parse(file);
-    if(number === 'all'){
+    if(fl.length <= 0){
+      console.log('Lista jest pusta, nie możesz nic usunąć')
+    }else if(number === 'all'){
       fl.splice(0,fl.length);
       await write(path, JSON.stringify(fl));
       console.log('Usunąłeś wszystkie zadania!');
-    }
-    if(fl.length <= 0){
-      console.log('Lista jest pusta, nie możesz nic usunąć')
     }else{    
       fl.splice(number - 1,1);
       await write(path, JSON.stringify(fl));
