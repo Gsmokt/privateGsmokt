@@ -14,7 +14,7 @@ const func = async(filename) => {
       File_size: `${res.size} B`,
       File_creation_date: `${res.birthtime.toLocaleString()}`,
       File_data_modification_date: `${res.mtime.toLocaleString()}`,
-      File_resus_modification_date: `${res.ctime.toLocaleString()}`
+      File_status_modification_date: `${res.ctime.toLocaleString()}`
       }
       for(const [key,value] of Object.entries(stats)){
       console.log(`${key}: ${value}`);
