@@ -17,10 +17,8 @@ const write = async(path, data) => {
 const func = (num) => {
     return new Promise((resolve, reject) => {
         axios.get( `http://numbersapi.com/${num}`)
-        .then((response) => {
-            if(response.status === 200 && response.statusText === 'OK') resolve(response);
-          })
-          .catch(error => reject(`Błąd pobierania: ${error}`));
+        .then((response) => resolve(response))
+          .catch(error => reject(`Błąd pobierania: ${error.message}`));
         })
 }
 
