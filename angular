@@ -1,0 +1,138 @@
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { NgxSnakeComponent } from 'ngx-snake';
+
+interface Person {
+  name: string,
+  email:string
+}
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  public value: boolean = true;
+  public hours: number = 0;
+  public minutes: number = 0;
+  public timer: number = 0;
+  public clear: boolean = false;
+  public points: number = 0;
+  public name: string = '';
+  public actionGained: Array<string|number> = [];
+  onChangeValue(value:string|{}[]){
+      console.log(value[2])
+       this.value = !this.value;
+   
+  
+    }
+  setTimer(){
+    this.clear = false;
+   const interval = setInterval(() => {
+      if(this.timer === 60) {
+        this.minutes += 1;
+        this.timer = 0;
+      }
+      if(this.minutes === 60){
+        this.hours += 1;
+        this.minutes = 0;
+      }
+      this.timer += 1;
+      if(this.clear === true) clearInterval(interval)
+    },1000)
+  }
+ clearTimer(){
+   this.clear = true;
+ }
+
+  @ViewChild('game')
+  private _snake!: NgxSnakeComponent;
+
+  public onRotateButtonPressed() {
+      this._snake.actionStart();
+      this._snake.actionStop();
+      this._snake.actionReset();
+      this._snake.actionUp();
+      this._snake.actionDown();
+      this._snake.actionLeft();
+      this._snake.actionRight();
+  }
+  public onGrow() {
+    this.points +=1;
+    this.actionGained.push(`${this.hours} h: ${this.minutes} m: ${this.timer} s`)
+}
+  public onGameOver() {
+    this.clear = true;
+    alert('game over');
+}
+  public clearAll(){
+    this.points = 0;
+    this.timer = 0;
+    this.minutes = 0;
+    this.hours = 0
+  }
+}
+
+
+
+
+
+
+<div [ngSwitch]="value">
+
+    <div *ngSwitchCase="true"> <app-child (listenParentHandler)="onChangeValue($event)"></app-child>    </div>
+<div *ngSwitchCase="false"> 
+    <div>{{"Points: " + points}}</div>
+    <div>{{hours +" h"}} {{minutes +" m"}} {{timer +" s"}}</div>
+    <div *ngFor="let el of actionGained">{{el}}</div>
+    <ngx-snake #game (foodEaten)="onGrow()" (gameOver)="onGameOver()"></ngx-snake>
+<div>{{name}}</div>
+<button (click)="game.actionStart()" (click)="setTimer()">Start</button>
+<button (click)="game.actionStop()" (click)="clearTimer()">Stop</button>
+<button (click)="game.actionReset()" (click)="clearAll()">Reset</button>
+<button (click)="game.actionUp()">Up</button>
+<button (click)="game.actionLeft()">Left</button>
+<button (click)="game.actionRight()">Right</button>
+<button (click)="game.actionDown()">Down</button>  </div>
+</div>
+
+
+
+
+
+
+import { Component, Input, OnInit, EventEmitter , Output} from '@angular/core';
+
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.scss']
+})
+
+export class ChildComponent implements OnInit {
+  public name: string = '';
+  public email: string = '';
+  @Output() listenParentHandler: EventEmitter<Array<string|{}>> = new EventEmitter();
+
+  public onSubmit(event: Event){
+    event.preventDefault();
+    this.listenParentHandler.emit([this.name, this.email, event.timeStamp]);
+  }
+  
+  ngOnInit(): void {
+  }
+  
+}
+
+
+
+
+
+
+
+<form (submit)="onSubmit($event)" validate>
+    <label>Player name: <input type="text" [(ngModel)]="name" name = "name" required></label>
+    <label>E-mail: <input type="email" [(ngModel)]="email" name="email" required pattern=".+@.+"></label>
+    <button type="submit">Go !!!!!</button>
+</form>
+<div>{{name}}</div>

@@ -6,12 +6,12 @@ const {deleteTask} = require('./DeleteTask');
 
 
   program
-  .command('add <task>')
+  .command('ad [add] [task]', {isDefault:true})
   .description('Add new task')
-  .action((task)=> storeData(task, 'fil.json')
+  .action((add, task)=> storeData(add, task, 'fil.json')
   )
   program
-  .command('delete <num>')
+  .command('delete [num]')
   .description('Delete task')
   .action((num)=> deleteTask(num, 'fil.json')
   )
@@ -21,6 +21,12 @@ const {deleteTask} = require('./DeleteTask');
   .action(()=> printData('fil.json')
 )
   program.parse(process.argv)
+
+  // Przykład wywołania programu:
+
+  // > node ap.js add "napisac program na zaliczenie z NodeJS"
+  // > node ap.js list
+  // > node ap.js delete 
 
 
 
