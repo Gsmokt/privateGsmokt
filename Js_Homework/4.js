@@ -1,22 +1,3 @@
-// class Fibonacci{
-//     constructor(num){
-//         this.num = num;
-//     };
-//     sequence(){
-//         if(this.num < 3) return 1;
-//         let prev = 1;
-//         let cur = 1;
-//         for(let i=2;i<this.num;i++){
-//             const next = prev + cur;
-//             prev = cur;
-//             cur = next;
-//             console.log(next);
-//         }
-//         return cur;
-//     }
-// }
-// const go = new Fibonacci(3);
-// console.log(go.sequence());
 
 class Fibonacci{
     constructor(arg1,arg2) {
