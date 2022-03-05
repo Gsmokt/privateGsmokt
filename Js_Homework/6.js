@@ -13,7 +13,7 @@ class Translator{
         return result.join(' ');
     }
 }
-const translate = new Translator('siema leszek co tam');
+const translate = new Translator('Hello world');
 // console.log(translate.englishTranslator());
 console.log(translate.pigLatinTranslator());
 
