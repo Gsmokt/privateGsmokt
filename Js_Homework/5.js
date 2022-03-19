@@ -1,8 +1,17 @@
-
-const numbersFilter = (arg) => {
-  if(typeof arg === 'number') console.log(arg)
-  else if(typeof arg === 'string') console.log(parseInt(arg.match(/\d/g).join(''), 10));
-  else return;
+const numbersFilter = arg => {
+  if (typeof arg !== 'string' && typeof arg !== 'number') console.log("Enter a number or string");
+  else if (typeof arg === "number")
+    console.log(arg.toString().match(/\d/g).map(e => parseInt(e)));
+  else 
+    console.log(arg.match(/\d/g).map(e => parseInt(e)));
 };
 
-numbersFilter('aFFF,,,c2f3g42');
+numbersFilter(2342);
+numbersFilter('A243b');
+
+
+
+
+
+
+

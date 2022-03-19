@@ -1,7 +1,7 @@
-const arr = (nums, k) => {
-    for (let i = 0; i < k; i++) {
-        nums.unshift(nums.pop());
-    }
-    return nums;
+const reverse = (array, k) => {
+  for (let i = 0; i < k; i++) {
+    array.unshift(array.pop());
   }
-console.log(arr([1,2,3,4], 2));
+  return array;
+}
+console.log(reverse([1, 2, 3, 4], 2));
